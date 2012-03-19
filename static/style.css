@@ -1,0 +1,198 @@
+*
+{
+    border: none; 
+    margin: 0; 
+    padding: 0;
+    outline: 0;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: #079;
+}
+
+body
+{
+    background-color: #222;
+}
+
+#left	
+{
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 10%;
+    padding-right: 0.5em;
+}
+
+#center
+{
+    position: absolute;
+    left: 10%;
+    min-height: 90%;
+    width: 55%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+#right
+{
+    position: absolute;
+    left: 70%;
+    width: 20%;
+    padding-left: 5%;
+    padding-right: 5%;
+    min-height: 90%;
+}
+
+#menu
+{
+    padding: 0.3em;
+}
+input
+{
+    padding: 0.2em;
+    margin: 0.2em;
+    color: #007799;
+    border: 1px solid black;
+    background-color: #2f2f2f;
+}
+
+h1  
+{
+    position: relative;
+    top: 4em;
+    padding: 0.6em;
+    -o-transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg); 
+    -moz-transform: rotate(-90deg);	
+
+    font-family: sans-serif;
+    font-weight: bold;
+    color: #007799;
+    font-size: 5em;
+
+    text-shadow: 0 0 0.1em #eee;
+}
+
+.listButton 
+{           
+    position: absolute;
+    bottom:25%;
+    right: 0;
+    height:0.5em;
+    width:0.5em;
+}
+
+.listHeader .listButton
+{
+    height:0.7em;
+    width:0.7em;
+}
+
+li
+{
+    position: relative;
+    width: 100%;
+}
+
+.listHeader
+{
+    border-bottom: 1px solid black;
+}
+
+h2
+{
+    position: relative;
+    bottom: 0;
+    left: 0;
+    font-size: 1.3em;
+    padding-right: 1em;
+}
+ul      
+{
+    background-color: #2f2f2f;
+    float: left;
+    border-right:2px solid #3f3f3f;
+    border-bottom: 2px solid #3f3f3f;
+    list-style: none;
+    padding: 2px;
+    margin: 3px;
+    font-family: sans-serif;
+    margin-top: 50px;
+}
+a.delButton
+{
+    right: 0;
+}
+a.link
+{
+    font-size: 0.75em;
+    margin-right: 1em;
+    color: #007799;
+}
+ul a:visited 
+{
+}
+ul a:hover 
+{
+    color: red;
+}
+
+#add_link
+{
+    position:absolute;
+    display: inline;
+    right: 0;
+    bottom: 0;
+}
+
+.expandingArea {
+    position: relative;
+    margin-top: 50px;
+    border: 1px solid black;
+    background: #2f2f2f;
+}
+
+.expandingArea > textarea,
+.expandingArea > pre {
+    padding: 3px;
+    background: transparent;
+    font: 400 13px/16px helvetica, arial, sans-serif;
+    /* Make the text soft-wrap */
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.expandingArea > textarea {
+  /* The border-box box model is used to allow
+   * padding whilst still keeping the overall width
+   * at exactly that of the containing element.
+   */
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+      -ms-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 100%;
+  /* This height is used when JS is disabled */
+  height: 100px;
+}
+
+.expandingArea.active > textarea {
+  /* Hide any scrollbars */
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  /* Remove WebKit user-resize widget */
+  resize: none;
+}
+
+.expandingArea > pre {
+  display: none;
+}
+
+.expandingArea.active > pre {
+  display: block;
+  /* Hide the text; just using it for sizing */
+  visibility: hidden;
+}

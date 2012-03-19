@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+        <title>
+            Stuffster
+        </title>
+        <link rel="stylesheet" 
+         type="text/css"
+         href="{{ url_for('static', filename='style.css') }}">
+
+    </head>
+
+    <body>
+        <div id="left">
+            <div id="menu">
+                <a href="{{ url_for('logout') }}" alt="logout"> log out </a>
+            </div>
+            <h1>
+                stuffster
+            </h1>
+        </div>
+        <div id="center">
+            {% for cat in categories %}
+            <ul class = "category">
+                <li class="listHeader">
+                    <h2>
+                        {{ cat.name }}
+                    </h2>
+                    <!--<img class = "listButton" 
+                    src = "{{ url_for('static', filename='linkPlus.png') }}" 
+                    alt = "Add a link to {{ cat.name }}"
+                    onClick = "addLink({{cat.name}})">-->
+                </li>
+                {% for link in cat.links %}
+                    <li class="linkItem"> 
+                    <a target="_blank" class="link" href="{{link.address}}">{{link.name}}</a>
+                    <a href="{{ url_for('del_link', linkid=link.id,
+                        cat=cat.name)}}" class = "delButton">
+                        <img class = "listButton" 
+                        src = "{{ url_for('static',filename='linkCross.png') }}" 
+                        alt="Remove link '{{ link.name}}" 
+                        onClick = "addLink({{cat.name}})">
+                     </a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endfor %}
+            <form  id="add_link" action = "add_link" method = "post">
+                <h2> add link </h2>
+                <table>
+                    <tr><td><label> name:       </td><td><input type=text name= name></label></td></tr>
+                    <tr><td><label> address:    </td><td><input type=text name= address></label></td></tr>
+                    <tr><td><label> categories: </td><td><input type=text name= cats></label></td></tr>
+                    <tr><td><input type="submit" value = "add"></td></tr>
+                </table>
+            </form>
+        </div>
+        <div id="right">
+            <form id="save_note" action = "save_note" method = "post">
+                <div class="expandingArea">
+                    <pre><span></span><br></pre>
+                    <textarea id="text_area" name = "note">{{user_note}} </textarea>
+                </div>
+                <input type = "submit" value = "save note"> 
+            </form>
+        <script type="text/javascript">
+            function makeExpandingArea(container) {
+             var area = container.querySelector('textarea');
+             var span = container.querySelector('span');
+             if (area.addEventListener) {
+               area.addEventListener('input', function() {
+                 span.textContent = area.value;
+               }, false);
+               span.textContent = area.value;
+             } else if (area.attachEvent) {
+               // IE8 compatibility
+               area.attachEvent('onpropertychange', function() {
+                 span.innerText = area.value;
+               });
+               span.innerText = area.value;
+             }
+             // Enable extra CSS
+             container.className += ' active';
+            }
+
+            var areas = document.querySelectorAll('.expandingArea');
+            var l = areas.length;
+
+            while (l--) {
+             makeExpandingArea(areas[l]);
+            }
+        </script>
+        </div>
+    </body>
+</html>
