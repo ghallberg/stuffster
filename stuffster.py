@@ -21,6 +21,9 @@ def login():
     and authorized"""
     if db.auth_user(request.form['username'], request.form['password']):
         session['username'] = request.form['username']
+        if 'remember' in request.form:
+            print("Remembering user")
+            session.permanent = True
         return redirect(url_for('stuffster'))
     else:
         return render_template('login.html')
@@ -43,6 +46,7 @@ def create_user():
 def logout():
     """remove username from session if it's there"""
     session.pop('username', None)
+    session.permanent = False
     return redirect(url_for('stuffster'))
 
 @app.route('/save_note', methods=['POST'])
@@ -72,5 +76,5 @@ def del_link():
 
 if __name__ == '__main__':
     app.secret_key = 'fatsug'
-    app.run(host = '127.0.0.1', debug = False)
+    app.run(host = '127.0.0.1', debug = True)
 
