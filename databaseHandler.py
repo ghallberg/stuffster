@@ -48,7 +48,7 @@ class Category(Base):
     __tablename__ = 'categories'
     name = Column(String, nullable=False, primary_key=True)
     owner_id = Column(Integer, ForeignKey('users.name'), primary_key=True)
-    owner = relationship("User", backref=backref('categories'), order_by=name)
+    owner = relationship("User", backref=backref('categories'), order_by=User.name)
 
     links=relationship("Link",
                        secondary=association_table,
@@ -135,14 +135,15 @@ def del_link(linkid, target_cat):
         return False
 
     #Delete link
-    cats = session.query(Category).filter(Category.links.contains(link))
-    for cat in cats:
-        print cat.links
-        print link
-        if cat.name == target_cat:
-            cat.links.remove(link)
-            if len(cat.links) == 0:
-                session.delete(cat)
+    cat = session.query(Category).\
+            filter(Category.name == target_cat).\
+            first()
+    print cat
+    print link
+    cat.links.remove(link)
+    if len(cat.links) == 0:
+        session.delete(cat)
+
     session.flush()
     session.commit()
 
